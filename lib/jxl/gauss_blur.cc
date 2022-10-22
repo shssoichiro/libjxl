@@ -608,6 +608,13 @@ void FastGaussianHorizontal(const hwy::AlignedUniquePtr<RecursiveGaussian>& rg,
         FastGaussian1D(rg, row_in, xsize, row_out);
       },
       "FastGaussianHorizontal"));
+  for (size_t y = 0; y < out->ysize(); ++y) {
+    const float* in1 = out->ConstRow(y);
+    for (size_t x = 0; x < out->xsize(); ++x) {
+      fprintf(stderr, "%.6f\n", in1[x]);
+    }
+  }
+  exit(0);
 }
 
 }  // namespace
