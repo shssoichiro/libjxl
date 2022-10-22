@@ -334,6 +334,15 @@ Msssim ComputeSSIMULACRA2(const jxl::ImageBundle& orig,
     blur.ShrinkTo(img1.xsize(), img2.ysize());
 
     Multiply(img1, img1, &mul);
+    for (size_t y = 0; y < mul.ysize(); ++y) {
+      const float* JXL_RESTRICT in1 = mul.PlaneRow(0, y);
+      const float* JXL_RESTRICT in2 = mul.PlaneRow(1, y);
+      const float* JXL_RESTRICT in3 = mul.PlaneRow(2, y);
+      for (size_t x = 0; x < mul.xsize(); ++x) {
+        fprintf(stderr, "%.6f %.6f %.6f\n", in1[x], in2[x], in3[x]);
+      }
+    }
+    exit(0);
     Image3F sigma1_sq = blur(mul);
 
     Multiply(img2, img2, &mul);
