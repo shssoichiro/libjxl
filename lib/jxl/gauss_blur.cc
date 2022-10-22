@@ -586,6 +586,21 @@ hwy::AlignedUniquePtr<RecursiveGaussian> CreateRecursiveGaussian(double sigma) {
     rg->mul_in[4 * i + 2] = d_2 * n2[i] - n2[i];
     rg->mul_in[4 * i + 3] = -d_2 * d1[i] * n2[i] + 2.0 * d1[i] * n2[i];
   }
+  for (int i = 0; i < sizeof(rg->n2) / sizeof(rg->n2[0]); i++) {
+    fprintf(stderr, "n2: %.6f\n", rg->n2[i]);
+  }
+  for (int i = 0; i < sizeof(rg->d1) / sizeof(rg->d1[0]); i++) {
+    fprintf(stderr, "d1: %.6f\n", rg->d1[i]);
+  }
+  for (int i = 0; i < sizeof(rg->mul_prev) / sizeof(rg->mul_prev[0]); i++) {
+    fprintf(stderr, "mul_prev: %.6f\n", rg->mul_prev[i]);
+  }
+  for (int i = 0; i < sizeof(rg->mul_prev2) / sizeof(rg->mul_prev2[0]); i++) {
+    fprintf(stderr, "mul_prev2: %.6f\n", rg->mul_prev2[i]);
+  }
+  for (int i = 0; i < sizeof(rg->mul_in) / sizeof(rg->mul_in[0]); i++) {
+    fprintf(stderr, "mul_in: %.6f\n", rg->mul_in[i]);
+  }
   return rg;
 }
 
