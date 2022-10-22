@@ -270,8 +270,14 @@ double Msssim::Score() const {
                scales[scale].avg_edgediff[c * 4 + n],
                scales[scale].avg_edgediff[c * 4 + 2 + n]);
 #endif
+        fprintf(stderr, "w %.10f, ssim %.10f\n", weight[i],
+                scales[scale].avg_ssim[c * 2 + n]);
         ssim += weight[i++] * std::abs(scales[scale].avg_ssim[c * 2 + n]);
+        fprintf(stderr, "w %.10f, edged1 %.10f\n", weight[i],
+                scales[scale].avg_edgediff[c * 4 + n]);
         ssim += weight[i++] * std::abs(scales[scale].avg_edgediff[c * 4 + n]);
+        fprintf(stderr, "w %.10f, edged2 %.10f\n", weight[i],
+                scales[scale].avg_edgediff[c * 4 + n + 2]);
         ssim +=
             weight[i++] * std::abs(scales[scale].avg_edgediff[c * 4 + n + 2]);
       }
@@ -279,6 +285,7 @@ double Msssim::Score() const {
   }
 
   ssim = ssim * 11.480665013024748 - 1.0204610491040174;
+  fprintf(stderr, "final ssim: %.10f\n", ssim);
 
   if (ssim > 0) {
     ssim = 100.0 - 10.0 * pow(ssim, 0.6402032009298979);
